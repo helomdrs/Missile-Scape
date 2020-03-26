@@ -13,9 +13,9 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
+  - Player
+  - Missile
+  - Scenario
   - 
   - 
   - 
@@ -40,4 +40,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 3278669175
+    locked: 0
+  - name: Items
+    uniqueID: 1909397425
+    locked: 0
+  - name: Game
+    uniqueID: 1703471453
     locked: 0
