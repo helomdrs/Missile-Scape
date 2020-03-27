@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Coin
+  - AudioManager
+  - ScoreManager
+  - Shield
   layers:
   - Default
   - TransparentFX
@@ -16,7 +20,7 @@ TagManager:
   - Player
   - Missile
   - Scenario
-  - 
+  - Collectables
   - 
   - 
   - 
