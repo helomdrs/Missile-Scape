@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class Collectable : MonoBehaviour
 {
     AudioManager audioManager;
+    public float timeToDestruct;
     public abstract void OnCollected();
 
     private void Start()

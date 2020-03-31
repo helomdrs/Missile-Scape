@@ -9,6 +9,7 @@ public class ShieldController : Collectable
     public void Awake()
     {
         healthManager = GameObject.FindGameObjectWithTag("Player").GetComponent<SpaceshipHealth>();
+        Destroy(gameObject, this.timeToDestruct);
     }
 
     public override void OnCollected()

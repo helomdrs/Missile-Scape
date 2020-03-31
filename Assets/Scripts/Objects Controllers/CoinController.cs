@@ -9,6 +9,7 @@ public class CoinController : Collectable
     public void Awake()
     {
         scoreManager = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>();
+        Destroy(gameObject, this.timeToDestruct);
     }
 
     public override void OnCollected()

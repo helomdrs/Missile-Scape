@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class SpaceshipHealth : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public bool hasShield;
+
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         
@@ -19,5 +19,27 @@ public class SpaceshipHealth : MonoBehaviour
     public void AddShield()
     {
         Debug.Log("Has Shield");
+    }
+
+    void LoseShield() { Debug.Log("Shield destroyed"); hasShield = false; }
+                
+
+    void Die() { Debug.Log("GameOver"); }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Missile"))
+        {
+            collision.gameObject.GetComponent<MissileController>().DestroyMissile();
+
+            if (hasShield)
+            {
+                LoseShield();
+            }
+            else
+            {
+                Die();
+            }
+        }
     }
 }

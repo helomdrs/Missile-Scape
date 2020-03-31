@@ -8,6 +8,7 @@ TagManager:
   - AudioManager
   - ScoreManager
   - Shield
+  - Missile
   layers:
   - Default
   - TransparentFX
