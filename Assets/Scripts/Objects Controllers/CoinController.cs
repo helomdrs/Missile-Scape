@@ -6,6 +6,8 @@ public class CoinController : Collectable
 {
     ScoreManager scoreManager;
 
+    public int coinValue;
+
     public void Awake()
     {
         scoreManager = GameObject.FindGameObjectWithTag("ScoreManager").GetComponent<ScoreManager>();
@@ -14,7 +16,7 @@ public class CoinController : Collectable
 
     public override void OnCollected()
     {
-        scoreManager.AddScore();
+        scoreManager.AddScorePerCoin(coinValue);
         this.DestroyMyself();
     }
 

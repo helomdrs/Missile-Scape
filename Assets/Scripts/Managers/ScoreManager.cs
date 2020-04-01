@@ -1,23 +1,32 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public Text scoreTxt;
+    public GameManager manager;
+
+    float score;
+
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if (manager.isGameRunning)
+        {
+            score += Time.deltaTime;
+            scoreTxt.text = Mathf.RoundToInt(score).ToString();
+        } 
     }
 
-    public void AddScore()
+    public void AddScorePerCoin(int coinValue)
     {
-        Debug.Log("+1 no Score");
+        score += coinValue;
+        scoreTxt.text = Mathf.RoundToInt(score).ToString();
     }
 }

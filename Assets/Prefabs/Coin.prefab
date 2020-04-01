@@ -96,6 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeToDestruct: 10
+  coinValue: 5
 --- !u!58 &4714773359811277344
 CircleCollider2D:
   m_ObjectHideFlags: 0
