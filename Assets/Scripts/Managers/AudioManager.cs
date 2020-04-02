@@ -4,13 +4,27 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
+    public AudioSource spaceshipEngine, generalSFX;
+    public AudioClip[] soundEffects;
+    public GameManager manager;
+
+    void Update()
+    {
+        spaceshipEngine.enabled = manager.isGameRunning;
+    }
+
     public void PlayCoinCollectedSFX()
     {
-        Debug.Log("Coin Collected!");
+        generalSFX.PlayOneShot(soundEffects[0]);
     }
 
     public void PlayShieldCollectedSFX()
     {
-        Debug.Log("Shield Collected!");
+        generalSFX.PlayOneShot(soundEffects[1]);
+    }
+
+    public void PlayMissileExplosionSFX()
+    {
+        generalSFX.PlayOneShot(soundEffects[2]);
     }
 }

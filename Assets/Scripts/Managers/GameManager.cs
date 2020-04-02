@@ -2,18 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public bool isGameRunning;
 
+    public GameObject pausePanel;
+    public GameObject controls;
     public Text secondsTxt, minutesTxt;
 
     float timer;
     
     void Start()
     {
-        
+        pausePanel.SetActive(false);
+        controls.SetActive(true);
     }
 
     
@@ -29,6 +33,23 @@ public class GameManager : MonoBehaviour
 
     public void PauseGame()
     {
-        isGameRunning = !isGameRunning;
+        isGameRunning = false;
+        pausePanel.SetActive(true);
+        Time.timeScale = 0f;
+        controls.SetActive(false);
+    }
+
+    public void UnpauseGame()
+    {
+        isGameRunning = true;
+        pausePanel.SetActive(false);
+        Time.timeScale = 1f;
+        controls.SetActive(true);
+    }
+
+    public void QuitToMenu()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("MainMenu");
     }
 }

@@ -22,6 +22,7 @@ public class ScoreManager : MonoBehaviour
             score += Time.deltaTime;
             scoreTxt.text = Mathf.RoundToInt(score).ToString();
         } 
+
     }
 
     public void AddScorePerCoin(int coinValue)

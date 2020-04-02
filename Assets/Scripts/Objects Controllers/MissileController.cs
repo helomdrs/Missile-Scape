@@ -6,6 +6,7 @@ public class MissileController : MonoBehaviour
 {
     Transform target;
     Rigidbody2D body;
+    AudioManager audioManager;
 
     public float speed;
     public float rotateSpeed;
@@ -15,6 +16,8 @@ public class MissileController : MonoBehaviour
     {
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         body = GetComponent<Rigidbody2D>();
+
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
     }
 
     void FixedUpdate()
@@ -44,5 +47,15 @@ public class MissileController : MonoBehaviour
     {
         gameObject.GetComponent<SpriteRenderer>().enabled = false;
         Destroy(gameObject, 1f);
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Missile"))
+        {
+            audioManager.PlayMissileExplosionSFX();
+            gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            Destroy(gameObject, 1f);
+        }
     }
 }
