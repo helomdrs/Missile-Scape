@@ -6,25 +6,41 @@ public class SpaceshipHealth : MonoBehaviour
 {
     public bool hasShield;
 
-    void Start()
-    {
-        
-    }
+    public GameObject shield;
+    public GameManager manager;
+    public ParticleSystem explosion;
+    public AudioManager audioManager;
 
     void Update()
     {
-        
+        shield.SetActive(hasShield);
     }
 
     public void AddShield()
     {
         Debug.Log("Has Shield");
+        hasShield = true;
     }
 
-    void LoseShield() { Debug.Log("Shield destroyed"); hasShield = false; }
+    void LoseShield()
+    {
+        Debug.Log("Shield destroyed");
+        hasShield = false;
+    }
                 
 
-    void Die() { Debug.Log("GameOver"); }
+    void Die()
+    {
+        ParticleSystem explosionVFX = Instantiate(explosion, transform.position, Quaternion.identity) as ParticleSystem;
+        audioManager.PlaySpaceshipExplosionSFX();
+        Invoke("CallGameOver", explosionVFX.main.duration + 1f);
+        gameObject.SetActive(false);
+    }
+
+    void CallGameOver()
+    {
+        manager.GameOver();
+    }
 
     void OnTriggerEnter2D(Collider2D collision)
     {

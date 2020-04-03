@@ -8,6 +8,8 @@ public class MissileController : MonoBehaviour
     Rigidbody2D body;
     AudioManager audioManager;
 
+    TrailRenderer trail;
+
     public float speed;
     public float rotateSpeed;
     public float lifeTime;
@@ -16,26 +18,32 @@ public class MissileController : MonoBehaviour
     {
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         body = GetComponent<Rigidbody2D>();
-
         audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
+
+        trail = GetComponentInChildren<TrailRenderer>();
     }
 
     void FixedUpdate()
     {
         if(lifeTime > 0f) {
-            //A direção do míssil é definida pela diferença entre sua posição e a do alvo
-            Vector2 direction = (Vector2)target.position - body.position;
 
-            //Normalizar o vetor garante que seu valor seja um sem mudar o ângulo da direção
-            direction.Normalize();
+            if(target != null)
+            {
+                //A direção do míssil é definida pela diferença entre sua posição e a do alvo
+                Vector2 direction = (Vector2)target.position - body.position;
 
-            //Função matemática que cria um vetor ortogonal entre a direção que deve seguir e a atual, para obter o ângulo de rotação
-            float rotateAmout = Vector3.Cross(direction, transform.up).z;
+                //Normalizar o vetor garante que seu valor seja um sem mudar o ângulo da direção
+                direction.Normalize();
 
-            //Altera a velocidade ângular (de rotação) do corpo rígido
-            body.angularVelocity = -rotateAmout * rotateSpeed;
+                //Função matemática que cria um vetor ortogonal entre a direção que deve seguir e a atual, para obter o ângulo de rotação
+                float rotateAmout = Vector3.Cross(direction, transform.up).z;
 
-            body.velocity = transform.up * speed;
+                //Altera a velocidade ângular (de rotação) do corpo rígido
+                body.angularVelocity = -rotateAmout * rotateSpeed;
+
+                body.velocity = transform.up * speed;
+            }
+
         } else {
             DestroyMissile();
         }
@@ -46,7 +54,8 @@ public class MissileController : MonoBehaviour
     public void DestroyMissile()
     {
         gameObject.GetComponent<SpriteRenderer>().enabled = false;
-        Destroy(gameObject, 1f);
+        trail.enabled = false;
+        Destroy(gameObject, 2f);
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -54,8 +63,7 @@ public class MissileController : MonoBehaviour
         if (collision.gameObject.CompareTag("Missile"))
         {
             audioManager.PlayMissileExplosionSFX();
-            gameObject.GetComponent<SpriteRenderer>().enabled = false;
-            Destroy(gameObject, 1f);
+            DestroyMissile();
         }
     }
 }

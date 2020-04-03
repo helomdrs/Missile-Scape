@@ -27,4 +27,10 @@ public class AudioManager : MonoBehaviour
     {
         generalSFX.PlayOneShot(soundEffects[2]);
     }
+
+    public void PlaySpaceshipExplosionSFX()
+    {
+        generalSFX.PlayOneShot(soundEffects[2]);
+        spaceshipEngine.volume = 0f;
+    }
 }

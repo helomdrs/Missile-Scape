@@ -8,7 +8,7 @@ public class ScoreManager : MonoBehaviour
     public Text scoreTxt;
     public GameManager manager;
 
-    float score;
+    public float score;
 
     void Start()
     {
@@ -29,5 +29,26 @@ public class ScoreManager : MonoBehaviour
     {
         score += coinValue;
         scoreTxt.text = Mathf.RoundToInt(score).ToString();
+    }
+
+    public void SetHighscore()
+    {
+        if (!PlayerPrefs.HasKey("Highscore"))
+        {
+            PlayerPrefs.SetInt("Highscore", Mathf.RoundToInt(score));
+            PlayerPrefs.SetString("NewHighscore", "yes");
+        }
+        else
+        {
+            if (PlayerPrefs.GetInt("Highscore") < score)
+            {
+                PlayerPrefs.SetInt("Highscore", Mathf.RoundToInt(score));
+                PlayerPrefs.SetString("NewHighscore", "yes");
+            }
+
+            PlayerPrefs.SetString("NewHighscore", "no");
+        }
+
+        Debug.Log("Highscore: " + PlayerPrefs.GetInt("Highscore"));
     }
 }

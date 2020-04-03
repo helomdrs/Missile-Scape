@@ -10,13 +10,17 @@ public class GameManager : MonoBehaviour
 
     public GameObject pausePanel;
     public GameObject controls;
+    public GameObject gameoverPanel;
     public Text secondsTxt, minutesTxt;
 
     float timer;
+
+    public ScoreManager scoreManager;
     
     void Start()
     {
         pausePanel.SetActive(false);
+        gameoverPanel.SetActive(false);
         controls.SetActive(true);
     }
 
@@ -51,5 +55,14 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenu");
+    }
+
+    public void GameOver()
+    {
+        scoreManager.SetHighscore();
+        isGameRunning = false;
+        gameoverPanel.SetActive(true);
+        controls.SetActive(true);
+        Time.timeScale = 0f;
     }
 }
