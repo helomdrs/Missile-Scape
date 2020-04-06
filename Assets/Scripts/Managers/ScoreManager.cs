@@ -48,7 +48,5 @@ public class ScoreManager : MonoBehaviour
 
             PlayerPrefs.SetString("NewHighscore", "no");
         }
-
-        Debug.Log("Highscore: " + PlayerPrefs.GetInt("Highscore"));
     }
 }
