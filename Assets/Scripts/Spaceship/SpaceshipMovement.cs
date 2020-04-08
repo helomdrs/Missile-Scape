@@ -10,10 +10,12 @@ public class SpaceshipMovement : MonoBehaviour
     //Velocidade de rotação da nave
     public float rotationSpeed;
 
+    //Referencia ao componente Rigidbody
     Rigidbody2D rb;
 
     void Start()
     {
+        //Pegando o componente no objeto
         rb = GetComponent<Rigidbody2D>();
     }
 

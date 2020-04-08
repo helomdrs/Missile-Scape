@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class MenuSkyController : MonoBehaviour
 {
-    //Diferença de velocidade entre a movimentação do player e do offset do céu
+    //Diferença de velocidade entre a movimentação do player e do offset do céu, para um efeito de profundidade
     public float parallax = 2f;
 
+    //Componente mesh do Quad onde se encontra o material do céu
     MeshRenderer mesh;
+
+    //Referência do material da textura
     Material texture;
+
+    //Vetor do offset a ser movimentado
     Vector2 offset;
 
     void Start()
     {
+        //Referenciação dos componentes declarados
         mesh = GetComponent<MeshRenderer>();
         texture = mesh.material;
     }
@@ -20,10 +26,13 @@ public class MenuSkyController : MonoBehaviour
 
     void Update()
     {
+        //Pega o valor atual de offset da textura do objeto
         offset = texture.mainTextureOffset;
 
+        //Altera o valor em y do offset conforme o tempo passa / pelo parallax 
         offset.y +=  Time.deltaTime / parallax;
 
+        //Atualiza o valor de offset da textura do objeto
         texture.mainTextureOffset = offset;
     }
 }
